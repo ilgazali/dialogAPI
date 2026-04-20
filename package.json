@@ -1,0 +1,12 @@
+{
+  "name": "electron-dialog-demo",
+  "version": "1.0.0",
+  "description": "Electron 36 - Dialog API Complete Demo",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "devDependencies": {
+    "electron": "^36.0.0"
+  }
+}

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline';" />
+  <title>Electron 36 – Dialog API Demo</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <h1>⚡ Electron 36 — Dialog API Demo</h1>
+    <p class="subtitle">Interactive demo of every <code>dialog</code> module method and option</p>
+  </header>
+
+  <main>
+
+    <!-- ═══════════════════════ showOpenDialog ═══════════════════════ -->
+    <section class="card">
+      <h2>📂 dialog.showOpenDialog() <span class="badge async">async</span></h2>
+      <p>
+        Returns <code>Promise&lt;&#123; canceled, filePaths, bookmarks? &#125;&gt;</code>.
+        Each button below passes a different <code>properties</code> value or option combination.
+      </p>
+      <div class="btn-grid">
+        <button data-action="openFile">properties: ['openFile']</button>
+        <button data-action="openMultiple">properties: ['multiSelections']</button>
+        <button data-action="openDirectory">properties: ['openDirectory']</button>
+        <button data-action="openFileAndDir">properties: ['openFile','openDirectory']</button>
+        <button data-action="openHidden">properties: ['showHiddenFiles']</button>
+        <button data-action="openFiltered">filters: jpg / png / gif</button>
+        <button data-action="openWithTitle">title + message + buttonLabel</button>
+        <button data-action="openNoResolve">properties: ['noResolveAliases'] <span class="btn-badge">macOS</span></button>
+        <button data-action="openTreatPkg">properties: ['treatPackageAsDirectory'] <span class="btn-badge">macOS</span></button>
+        <button data-action="openPromptCreate">properties: ['promptToCreate'] <span class="btn-badge">Win</span></button>
+        <button data-action="openDontAddRecent">properties: ['dontAddToRecent']</button>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════ showOpenDialogSync ═══════════════════════ -->
+    <section class="card">
+      <h2>📂 dialog.showOpenDialogSync() <span class="badge sync">sync</span></h2>
+      <p>
+        Returns <code>string[] | undefined</code> — same options as async, but blocks the main process until closed.
+      </p>
+      <div class="btn-grid">
+        <button data-action="openSync">properties: ['openFile']</button>
+        <button data-action="openSyncMulti">properties: ['multiSelections']</button>
+        <button data-action="openSyncDir">properties: ['openDirectory']</button>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════ showSaveDialog ═══════════════════════ -->
+    <section class="card">
+      <h2>💾 dialog.showSaveDialog() <span class="badge async">async</span></h2>
+      <p>
+        Returns <code>Promise&lt;&#123; canceled, filePath, bookmark? &#125;&gt;</code>.
+        Tests all major options: <code>filters</code>, <code>defaultPath</code>, <code>buttonLabel</code>, <code>properties</code>.
+      </p>
+      <div class="btn-grid">
+        <button data-action="saveBasic">Basic (no options)</button>
+        <button data-action="saveFiltered">filters: txt / md / json</button>
+        <button data-action="saveCustomBtn">buttonLabel option</button>
+        <button data-action="saveDefaultPath">defaultPath option</button>
+        <button data-action="saveNoOverwrite">properties: ['showOverwriteConfirmation'] <span class="btn-badge">Linux</span></button>
+        <button data-action="saveHidden">properties: ['showHiddenFiles']</button>
+        <button data-action="saveDontAddRecent">properties: ['dontAddToRecent'] <span class="btn-badge">Win</span></button>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════ showSaveDialogSync ═══════════════════════ -->
+    <section class="card">
+      <h2>💾 dialog.showSaveDialogSync() <span class="badge sync">sync</span></h2>
+      <p>
+        Returns <code>string</code> (empty string if cancelled). Blocks the main process.
+      </p>
+      <div class="btn-grid">
+        <button data-action="saveSync">Basic (no options)</button>
+        <button data-action="saveSyncFiltered">filters: csv / xlsx</button>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════ showMessageBox – Types ═══════════════════════ -->
+    <section class="card">
+      <h2>💬 dialog.showMessageBox() <span class="badge async">async</span> — type option</h2>
+      <p>
+        Returns <code>Promise&lt;&#123; response, checkboxChecked &#125;&gt;</code>.
+        The <code>type</code> option controls the icon: <code>none</code> | <code>info</code> | <code>error</code> | <code>question</code> | <code>warning</code>.
+      </p>
+      <div class="btn-grid">
+        <button data-action="msgNone">type: "none"</button>
+        <button data-action="msgInfo">type: "info"</button>
+        <button data-action="msgError">type: "error"</button>
+        <button data-action="msgQuestion">type: "question"</button>
+        <button data-action="msgWarning">type: "warning"</button>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════ showMessageBox – Advanced ═══════════════════════ -->
+    <section class="card">
+      <h2>💬 dialog.showMessageBox() — Advanced Options</h2>
+      <p>
+        Tests: <code>checkboxLabel</code>, <code>detail</code>, <code>noLink</code>,
+        <code>normalizeAccessKeys</code>, <code>defaultId</code>, <code>cancelId</code>,
+        <code>icon</code> (NativeImage), <code>buttons[]</code>, <code>textWidth</code>, <code>alwaysOnTop</code>.
+      </p>
+      <div class="btn-grid">
+        <button data-action="msgCheckbox">checkboxLabel + checkboxChecked</button>
+        <button data-action="msgDetail">detail option</button>
+        <button data-action="msgNoLink">noLink: true <span class="btn-badge">Win</span></button>
+        <button data-action="msgNormalizeKeys">normalizeAccessKeys: true</button>
+        <button data-action="msgDefaultCancel">defaultId + cancelId</button>
+        <button data-action="msgCustomIcon">icon (NativeImage from base64)</button>
+        <button data-action="msgManyButtons">buttons[] — 5 items (response index)</button>
+        <button data-action="msgTextWidth">textWidth <span class="btn-badge">macOS</span></button>
+        <button data-action="msgAlwaysOnTop">alwaysOnTop <span class="btn-badge">macOS</span></button>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════ showMessageBox – AbortSignal ═══════════════════════ -->
+    <section class="card">
+      <h2>💬 dialog.showMessageBox() — signal: AbortSignal <span class="badge async">async</span></h2>
+      <p>
+        Passing an <code>AbortSignal</code> lets you programmatically close the dialog.
+        The demo auto-cancels after <strong>4 seconds</strong> via <code>AbortController</code>.
+      </p>
+      <div class="btn-grid">
+        <button data-action="msgAbortable">signal: AbortSignal (auto-cancel 4 s)</button>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════ showMessageBoxSync ═══════════════════════ -->
+    <section class="card">
+      <h2>💬 dialog.showMessageBoxSync() <span class="badge sync">sync</span></h2>
+      <p>
+        Returns <code>Integer</code> — the index of the clicked button. Blocks the main process.
+      </p>
+      <div class="btn-grid">
+        <button data-action="msgSync">Basic (returns button index)</button>
+        <button data-action="msgSyncQuestion">type: "question" + defaultId + cancelId</button>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════ showErrorBox ═══════════════════════ -->
+    <section class="card">
+      <h2>🚨 dialog.showErrorBox(title, content)</h2>
+      <p>
+        Modal, synchronous error box. Safe to call before the <code>app ready</code> event.
+        On Linux before ready, output goes to <code>stderr</code> (no GUI).
+      </p>
+      <div class="btn-grid">
+        <button data-action="errBasic">Basic (title + content)</button>
+        <button data-action="errLong">Long content (stack trace)</button>
+        <button data-action="errUnicode">Unicode characters (CJK, Arabic, Emoji)</button>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════ showCertificateTrustDialog ═══════════════════════ -->
+    <section class="card">
+      <h2>🔐 dialog.showCertificateTrustDialog() <span class="badge platform">macOS / Windows</span></h2>
+      <p>
+        Returns <code>Promise&lt;void&gt;</code>. Options: <code>certificate</code> (Certificate object) + <code>message</code> string.
+        Not supported on Linux — a fallback message is shown instead.
+      </p>
+      <div class="btn-grid">
+        <button data-action="certTrust">showCertificateTrustDialog({ certificate, message })</button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ═══════════════════════ RESULT PANEL ════════════════════════ -->
+  <aside id="result-panel">
+    <div id="result-header">
+      <span>📋 Result Panel</span>
+      <button id="clear-btn">Clear</button>
+    </div>
+    <pre id="result-box">Click a button to launch a dialog demo...</pre>
+  </aside>
+
+  <script src="renderer.js"></script>
+</body>
+</html>
