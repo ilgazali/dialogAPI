@@ -29,7 +29,7 @@ const ACTIONS = {
   msgCheckbox, msgDetail, msgNoLink, msgNormalizeKeys,
   msgDefaultCancel, msgCustomIcon, msgManyButtons,
   msgTextWidth, msgAlwaysOnTop,
-  msgAbortable, msgSync, msgSyncQuestion,
+  msgSync, msgSyncQuestion,
   errBasic, errLong, errUnicode,
   certTrust,
 };
@@ -446,16 +446,6 @@ async function msgManyButtons() {
     noLink: false,
   });
   show('showMessageBox  buttons[5]  defaultId:0  cancelId:3  →  response index', r);
-}
-
-// ═══════════════════════════════════════════════════════════════════════════
-// dialog.showMessageBox()  — signal: AbortSignal
-// ═══════════════════════════════════════════════════════════════════════════
-
-async function msgAbortable() {
-  show('showMessageBox  signal:AbortSignal', { status: 'Dialog opening — will auto-cancel in 4 seconds...' });
-  const r = await d.showMessageBoxAbortable();
-  show('showMessageBox  signal:AbortSignal  → result', r);
 }
 
 // ═══════════════════════════════════════════════════════════════════════════

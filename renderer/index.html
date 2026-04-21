@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline';" />
-  <title>Electron 36 – Dialog API Demo</title>
+  <title>Electron 25 – Dialog API Demo</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <header>
-    <h1>⚡ Electron 36 — Dialog API Demo</h1>
+    <h1>⚡ Electron 25 — Dialog API Demo</h1>
     <p class="subtitle">Interactive demo of every <code>dialog</code> module method and option</p>
   </header>
 
@@ -113,18 +113,6 @@
         <button data-action="msgManyButtons">buttons[] — 5 items (response index)</button>
         <button data-action="msgTextWidth">textWidth <span class="btn-badge">macOS</span></button>
         <button data-action="msgAlwaysOnTop">alwaysOnTop <span class="btn-badge">macOS</span></button>
-      </div>
-    </section>
-
-    <!-- ═══════════════════════ showMessageBox – AbortSignal ═══════════════════════ -->
-    <section class="card">
-      <h2>💬 dialog.showMessageBox() — signal: AbortSignal <span class="badge async">async</span></h2>
-      <p>
-        Passing an <code>AbortSignal</code> lets you programmatically close the dialog.
-        The demo auto-cancels after <strong>4 seconds</strong> via <code>AbortController</code>.
-      </p>
-      <div class="btn-grid">
-        <button data-action="msgAbortable">signal: AbortSignal (auto-cancel 4 s)</button>
       </div>
     </section>
 

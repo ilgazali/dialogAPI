@@ -14,7 +14,6 @@ contextBridge.exposeInMainWorld('electronDialog', {
 
   // Message Box
   showMessageBox: (options) => ipcRenderer.invoke('dialog:showMessageBox', options),
-  showMessageBoxAbortable: () => ipcRenderer.invoke('dialog:showMessageBoxAbortable'),
   showMessageBoxSync: (options) => ipcRenderer.invoke('dialog:showMessageBoxSync', options),
 
   // Error Box

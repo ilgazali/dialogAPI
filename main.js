@@ -14,7 +14,7 @@ function createWindow() {
       contextIsolation: true,
       nodeIntegration: false,
     },
-    title: 'Electron 36 – Dialog API Demo',
+    title: 'Electron 25 – Dialog API Demo',
   });
 
   mainWindow.loadFile(path.join(__dirname, 'renderer', 'index.html'));
@@ -65,34 +65,6 @@ ipcMain.handle('dialog:showMessageBox', async (_, options) => {
   }
   const result = await dialog.showMessageBox(mainWindow, options);
   return result;
-});
-
-// ─── showMessageBox with AbortSignal ──────────────────────────────────────
-ipcMain.handle('dialog:showMessageBoxAbortable', async () => {
-  const controller = new AbortController();
-  const { signal } = controller;
-
-  // Auto-abort after 4 seconds to demonstrate the feature
-  const timer = setTimeout(() => controller.abort(), 4000);
-
-  try {
-    const result = await dialog.showMessageBox(mainWindow, {
-      type: 'info',
-      title: 'AbortSignal Demo',
-      message: 'Bu dialog 4 saniye sonra otomatik kapanacak!',
-      detail: 'AbortController ile dialog.showMessageBox iptal edilebilir.\nBekleyin veya manuel kapatın.',
-      buttons: ['Tamam', 'İptal'],
-      defaultId: 0,
-    }, signal);
-    clearTimeout(timer);
-    return { aborted: false, ...result };
-  } catch (err) {
-    clearTimeout(timer);
-    if (err.name === 'AbortError') {
-      return { aborted: true, response: -1, checkboxChecked: false };
-    }
-    throw err;
-  }
 });
 
 // ─── showMessageBoxSync ────────────────────────────────────────────────────
